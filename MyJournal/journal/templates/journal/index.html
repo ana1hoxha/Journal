@@ -1,15 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Journal</title>
+    <title>Document</title>
 </head>
 <body>
-<h1 id="pse">Hello Ana!</h1>
-    <script ></script>
+    here i will show all journals  for {{name}}
+
+    
+    <ul>
+        {% for journal in journals %}
+         <li>{{ journal }}</li>
+        {% empty %} 
+        <li>Asgje</li>
+        {% endfor %}
+    
+    </ul>
+
+
+    <a href="{% url 'journal:add' %}">Add a new Journal</a>
 </body>
 </html>
