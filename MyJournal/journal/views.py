@@ -1,40 +1,40 @@
 from django.shortcuts import render
 import datetime
 from django import forms
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.urls import reverse
+
+from .models import Journal
 
 
 # Create your views here.
 
-class NewJournalForm(forms.Form):
-    journal = forms.CharField(label="new Journal")
-
 
 def index(request):
-    if "journals" not in request.session:
-        request.session["journals"] = []
-    return render(request, "journal/index.html",  {
+    return render(request, "journals/index.html",  {
         # "name": name.capitalize(),
-        "journals": request.session["journals"]
+        "journals": Journal.objects.all()
     })
 
 
-def add(request):
-    if request.method == "POST":  # this means i submitted the form
-        form = NewJournalForm(request.POST)
-        if form.is_valid():
-            journal = form.cleaned_data["journal"]
-            request.session["journals"] += [journal]
-            print(request.session["journals"])
-            return HttpResponseRedirect(reverse("journal:index"))
-        else:
-            return render(request, "journal/add.html", {
-            "form": form,
-            "date": datetime.date.today()
-        })
+def journal(request, journal_id):
+    try:
+        journal= Journal.objects.get(id=journal_id)
+    except Journal.DoesNotExist:
+        raise Http404("Journal Not found")    
+    return render(request, "journals/journal.html", {
+        "journal": journal
+    })   
 
-    return render(request, "journal/add.html", {
-        "form": NewJournalForm(),
-        "date": datetime.date.today()
-    })
+
+def add(request, journal_id):
+    if request.method == "POST":
+        try:
+            journal = Journal.objects.get(pk=journal_id)
+        except KeyError:
+            return HttpResponseBadRequest("Bad Request: no journal chosen")
+        except Journal.DoesNotExist:
+            return HttpResponseBadRequest("Bad Request: journal does not exist")
+
+        return HttpResponseRedirect(reverse("journal", args=(journal_id,)))
+       

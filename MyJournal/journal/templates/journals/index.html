@@ -7,12 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    here i will show all journals  for {{name}}
-
-    
+  All you Journals!!!
     <ul>
         {% for journal in journals %}
-         <li>{{ journal }}</li>
+         <li>{{ journal.journal_text }}</li>
         {% empty %} 
         <li>Asgje</li>
         {% endfor %}
@@ -20,6 +18,5 @@
     </ul>
 
 
-    <a href="{% url 'journal:add' %}">Add a new Journal</a>
 </body>
 </html>
