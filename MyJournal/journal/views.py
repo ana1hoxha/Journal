@@ -27,18 +27,17 @@ def journal(request, journal_id):
     })
     
 
-def add(request, journal_id):
+def add(request):
    if request.method == "POST":
         try:
-            journal = Journal.objects.get(pk= journal_id)
+            journal = Journal.objects.get(pk=1)
         except KeyError:
             return HttpResponseBadRequest("Bad Request: no journal chosen")
         except Journal.DoesNotExist:
             return HttpResponseBadRequest("Bad Request: journal does not exist")
 
-        return HttpResponseRedirect(reverse("journal", args=(journal_id,)))
+        return HttpResponseRedirect(reverse("index"))
 
-
-       
-    
-    
+def newPage(request):
+   return render(request, "journals/newPage.html"
+    )

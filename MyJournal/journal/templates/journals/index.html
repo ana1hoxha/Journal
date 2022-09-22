@@ -10,15 +10,16 @@
   All you Journals!!!
     <ul>
         {% for journal in journals %}
-
-         <li>{{ journal.id }}</li>
-         <li>{{ journal.journal_text }}</li>
-         
-        {% empty %} 
-        <li>Asgje</li>
+         <li>
+            <a href="{% url 'journal' journal.id %}">
+                Journal {{journal.id}}: {{journal.journal_text}}
+            </a>
+        </li>
         {% endfor %}
     
     </ul>
+
+    <a href="{% url 'newPage' %}">Add a new Journal</a>
 
 
 </body>
