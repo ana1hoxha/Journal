@@ -10,7 +10,10 @@
   All you Journals!!!
     <ul>
         {% for journal in journals %}
+
+         <li>{{ journal.id }}</li>
          <li>{{ journal.journal_text }}</li>
+         
         {% empty %} 
         <li>Asgje</li>
         {% endfor %}
