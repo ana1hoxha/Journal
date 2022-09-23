@@ -9,7 +9,7 @@ urlpatterns = [
     path("", views.index, name = "index"),
     path("<int:journal_id>", views.journal, name="journal"),
     path("add", views.add, name = "add"),
-    path("newPage", views.newPage, name="newPage")
+
 
     
     # path("<str:name>", views.index, name = "index")
