@@ -50,16 +50,21 @@ def add(request):
               journal = Journal(journal_text = journal_textNew)
               journal.save() """
               form.save()
+              print("it worked out")
               return HttpResponseRedirect(reverse("index"))
           else:
-              return render(request, 'journals/add.html', {'form': form})
+              print("it didnt work out")
+              return render(request, 'journals/add.html', {'form': form,
+                                                           "date": datetime.date.today()})
       except KeyError:
           return   HttpResponseBadRequest("Bad Request: no journal chosen")
       except Journal.DoesNotExist:
             return HttpResponseBadRequest("Bad Request: journal does not exist")
            # if a GET (or any other method) we'll create a blank form    
   else:
-      return render(request, 'journals/add.html', {'form': SubscribeForm()}) 
+      return render(request, 'journals/add.html', {'form': SubscribeForm(),
+                                                   "date": datetime.date.today()
+                                                   }) 
 
    
 
