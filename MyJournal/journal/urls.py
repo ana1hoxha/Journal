@@ -9,9 +9,10 @@ urlpatterns = [
     path("", views.index, name = "index"),
     path("<int:journal_id>", views.journal, name="journal"),
     path("add", views.add, name = "add"),
+    path('<int:journal_id>/edit/', views.edit, name='edit')
+]
 
 
     
     # path("<str:name>", views.index, name = "index")
-]
 

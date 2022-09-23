@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from multiprocessing import context
+from django.shortcuts import render, get_object_or_404
 import datetime
 from django import forms
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.urls import reverse
 
+
 from .models import Journal
-from .forms import SubscribeForm
+from .forms import SubscribeForm, RenewForm
 
 
 # Create your views here.
@@ -28,19 +30,7 @@ def journal(request, journal_id):
         "date": datetime.date.today()
     })
     
-
-""" def add(request):
-   if request.method == "POST":
-        try:
-            
-        except KeyError:
-            return HttpResponseBadRequest("Bad Request: no journal chosen")
-        except Journal.DoesNotExist:
-            return HttpResponseBadRequest("Bad Request: journal does not exist")
-
-        return HttpResponseRedirect(reverse("index")) """
-    
-    
+        
 def add(request):
   if request.method == 'POST':
       try:
@@ -65,13 +55,22 @@ def add(request):
                                                    }) 
       
       
-    
-""" def newPage(request):
-   return render(request, "journals/newPage.html", {
-       "date": datetime.date.today()
-   }
-    ) """
+#HttpResponseRedirect: This creates a redirect to a specified URL (HTTP status code 302).
    
-   
-   
-   
+def edit(request, journal_id):
+    journal_instance = get_object_or_404(Journal, id=journal_id)
+    if request.method == 'POST':
+        form = RenewForm(request.POST)
+        if form.is_valid():
+            journal_instance.journal_text = form.cleaned_data['journal_text']
+            journal_instance.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = RenewForm()
+        context = {
+            'journal_id': journal_id,
+            'form': form,
+            'journal_instance': journal_instance,
+        }
+    return render(request, 'journals/edit.html', context)
+         
