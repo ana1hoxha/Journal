@@ -14,19 +14,27 @@
 
        <div class="row">
         
-        <div class="col-3 text-center my-5">
-        
-          <button id= "return">Go back 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg>
-        </button>
-        
- 
+        <div class="col-3 ">
 
-          
+          <div class="buttons">
+            <div class="row">
+              <a id = "return" href="{% url 'index' %}" class="btn" role="button">Go back 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg></a> 
+            </div>
+               
+          <div class="row">
+            <button id= "edit" class="btn">Edit</button>
+          </div>
+
+          </div>
+        
          
+          
+        
         </div>
+       
 
         <div class="col-6 mx-auto mt-5">
           <div class="card text-center" id="myCard">
@@ -48,9 +56,8 @@
         </div>
        
 
-0
-
        </div>
-    
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>       
 </body>
 </html>

@@ -10,8 +10,30 @@ img {
 }
 
 
-#return {
-    border: 2px solid #813b5e;
-    border-radius: 10%;
-    width:45%
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+#return, #edit  {
+    border: 1px solid #813b5e;
+    border-radius: 10%;
+    margin: 20px;
+ 
+}
+
+
+
+
+.journalWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.cardWrapper {
+    border: 1px solid #813b5e;
+    width: 30%;
+    background-color: #f1dcef;
+}
+
