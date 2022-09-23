@@ -4,8 +4,8 @@ from django import forms
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.urls import reverse
 
-from .models import Journal, SubscribeForm
-from django.forms import ModelForm
+from .models import Journal
+from .forms import SubscribeForm
 
 
 # Create your views here.
@@ -46,11 +46,9 @@ def add(request):
       try:
           form = SubscribeForm(request.POST)
           if form.is_valid():
-              """ journal_textNew= form.cleaned_data["journal_form"]
-              journal = Journal(journal_text = journal_textNew)
-              journal.save() """
-              form.save()
-              print("it worked out")
+              journal = form.save(commit=False)
+              journal.journal_text = request.POST.get('journal_text')
+              journal.save()
               return HttpResponseRedirect(reverse("index"))
           else:
               print("it didnt work out")
@@ -65,9 +63,9 @@ def add(request):
       return render(request, 'journals/add.html', {'form': SubscribeForm(),
                                                    "date": datetime.date.today()
                                                    }) 
-
-   
-
+      
+      
+    
 """ def newPage(request):
    return render(request, "journals/newPage.html", {
        "date": datetime.date.today()

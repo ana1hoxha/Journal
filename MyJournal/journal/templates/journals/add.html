@@ -24,7 +24,8 @@
         <div class="col-9">
           <form action="{% url 'add' %}" method="post">
             {% csrf_token %}
-            <textarea id="information" name ="page" class="form-control" rows="6" placeholder="What is on your mind..."></textarea>
+            {{ form }}
+            <!--<textarea id="information" name ="page" class="form-control" rows="6" placeholder="What is on your mind..."></textarea>-->
             <button id ="submitButton" class="btn">Submit</button>
           </form>
     
@@ -35,6 +36,6 @@
     
         </div>
     
-        <script type="module" src="{% static 'journal\\script.js' %}"></script>
+        <script src="{% static 'journal\\script.js' %}"></script>
 </body>
 </html>
