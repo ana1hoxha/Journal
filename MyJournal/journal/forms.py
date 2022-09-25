@@ -1,22 +1,26 @@
+from socket import fromshare
 from django.forms import ModelForm
-from journal.models import Journal
 from django import forms
-
+from journal.models import Journal
 
 class SubscribeForm(ModelForm):
     class Meta:
         model = Journal
         fields = ["journal_text"]  
         
+
+         
         
 class RenewForm(ModelForm):
     def clean_text(self):
         data = self.cleaned_data['journal_text']
         return data
+    
     class Meta:
         model =  Journal
         fields = ["journal_text"]    
         
+
 
 """ class RenewForm(forms.Form):
     renewal_text = forms.CharField(max_length=64)

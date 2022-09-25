@@ -14,14 +14,14 @@
 
     <div class="container">
         <div class="row">
-            <h1>Hello!</h1>
+            <h1>Hello, {{name}}!</h1>
         </div>
         <div class="row">
             <div class="col-8 journalWrapper">
                 {% for journal in journals %}
                         <div class="card cardWrapper mx-auto my-3">
                             <div class="card-body">
-                                <a href="{% url 'journal' journal.id %}">
+                                <a href="{% url 'journal' name journal.id %}">
                                     Journal {{journal.id}}: {{journal.journal_text}}
                                 </a>
                             </div>
@@ -32,14 +32,20 @@
             </div>
 
             <div class="col-4">
-                here goes an image
+
+                <div class="row">
+                    <div class="col-6 mt-5 mx-auto">
+                      <img id="notebook" src="{% static 'journal\\images\\diaryWriting.png' %}" alt="Journal - Notebook Clip Art @clipartmax.com">
+                    </div>
+                  </div>
+
             </div>
 
         </div>
        
 
 
-        <a href="{% url 'add' %}" class="btn" role="button">Write in your journal</a>
+        <a href="{% url 'add' name %}" class="btn" role="button">Write in your journal</a>
 
     </div>
 

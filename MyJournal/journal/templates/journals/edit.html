@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h1 id="greet">Hello</h1>
+                <h1 id="greet">Hello {{name}}</h1>
             </div>
             <div class="col-6" id="date_">
                 {{date}}
@@ -24,10 +24,10 @@
         <div class="col-9">
             <h2>Renew: {{journal_instance.id}}</h2>
             <p>{{ journal_instance.journal_text }}</p>
-          <form action="{% url 'edit' journal_id %}" method="post">
+          <form action="{% url 'edit' name journal_id %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <!--<textarea id="information" name ="page" class="form-control" rows="6" placeholder="What is on your mind..."></textarea>-->
+            <textarea id="information" name ="page" class="form-control" rows="6" placeholder="What is on your mind...">{{ journal_instance.journal_text}}</textarea>
             <button id ="submitButton" class="btn">Save</button>
           </form>
     

@@ -9,3 +9,4 @@ class Journal(models.Model):
         return f"Journal Id : {self.id} {self.journal_text}"
     
     
+
