@@ -6,10 +6,9 @@ from journal.models import Journal
 class SubscribeForm(ModelForm):
     class Meta:
         model = Journal
-        fields = ["journal_text"]  
+        fields = "__all__"
+       # fields = ["journal_text"]  
         
-
-         
         
 class RenewForm(ModelForm):
     def clean_text(self):
@@ -18,7 +17,8 @@ class RenewForm(ModelForm):
     
     class Meta:
         model =  Journal
-        fields = ["journal_text"]    
+        fields = "__all__"
+        #fields = ["journal_text"]    
         
 
 
@@ -27,7 +27,7 @@ class RenewForm(ModelForm):
     
     def clean_renewal_text(self):
         data = self.cleaned_data["renewal_text"]
-        return data
+        return data """
     
     #There are two important things to note. The first is that we get our data using 
     # self.cleaned_data['renewal_date'] and that we return this data whether 

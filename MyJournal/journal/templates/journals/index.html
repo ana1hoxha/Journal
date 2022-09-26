@@ -14,19 +14,17 @@
 
     <div class="container">
         <div class="row">
-            <h1>Hello, {{name}}!</h1>
+            <h1>Hello</h1>
         </div>
         <div class="row">
             <div class="col-8 journalWrapper">
                 {% for journal in journals %}
                         <div class="card cardWrapper mx-auto my-3">
                             <div class="card-body">
-                                <a href="{% url 'journal' name journal.id %}">
-                                    Journal {{journal.id}}: {{journal.journal_text}}
+                                 <a href="{% url 'journal1:journal' journal.id %}">
+                                    Journal {{journal.id}}: {{journal.journal_text}} {{journal.user}}
                                 </a>
                             </div>
-                     
-                    
                       </div>
                 {% endfor %}        
             </div>
@@ -45,7 +43,7 @@
        
 
 
-        <a href="{% url 'add' name %}" class="btn" role="button">Write in your journal</a>
+     <a href="{% url 'journal1:add' %}" class="btn" role="button">Write in your journal</a>
 
     </div>
 
