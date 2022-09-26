@@ -10,21 +10,8 @@ fetch("https://type.fit/api/quotes")
 
 
 
-document.querySelector("#submitButton").addEventListener("click",(event)=>{
-  if(document.querySelector("#information").value.length != 0){
-    textInfo = document.querySelector("#information").value;
-    //here i should find how to run python shell inside of the javascript
-  }
-  else {
-    return false;
-  }
-  
-})
 
 
-document.querySelector("#edit").addEventListener("click",(event)=>{
-  
-})
 
   
   

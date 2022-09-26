@@ -6,7 +6,8 @@ from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.urls import reverse, reverse_lazy
 from .models import Journal
 from .forms import SubscribeForm, RenewForm
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
+
 
 
 
@@ -82,4 +83,15 @@ class JournalUpdate(UpdateView):
     template_name = "journals/add.html"
     success_url= reverse_lazy('journal1:index')
     
+
+class JournalDelete(DeleteView):
+    model= Journal
+    fields = "__all__"
+    template_name = "journals/journal.html"
+    success_url= reverse_lazy('journal1:index') 
     
+def delete(request, journal_id):
+    object = Journal.objects.get(id=journal_id)
+    object.delete()
+    return HttpResponseRedirect(reverse("journal1:index"))
+   
