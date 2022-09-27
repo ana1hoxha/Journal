@@ -12,9 +12,19 @@
 <body>
 
 
+
+
     <div class="container">
         <div class="row">
             <h1>Hello</h1>
+
+       {% if request.user.is_authenticated %}
+       <p>{{request.user}}</p>
+       <a href="">Logout</a>
+       {% else %}
+       <a href="{% url 'user1:login' %}">Login</a>
+       {% endif %}
+
         </div>
         <div class="row">
             <div class="col-8 journalWrapper">

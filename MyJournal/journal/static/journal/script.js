@@ -10,8 +10,15 @@ fetch("https://type.fit/api/quotes")
 
 
 
+/* function confirmElimination(){
+  var res = confirm("Do you want to delete this journal?");
 
+  if (res){
+    return true;
+  } else{
+    return false;
+  }
 
+} */
 
-  
   

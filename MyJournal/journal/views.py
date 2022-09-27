@@ -91,7 +91,8 @@ class JournalDelete(DeleteView):
     success_url= reverse_lazy('journal1:index') 
     
 def delete(request, journal_id):
-    object = Journal.objects.get(id=journal_id)
-    object.delete()
-    return HttpResponseRedirect(reverse("journal1:index"))
+    if 'delete_amount' in request.POST:
+        object = Journal.objects.get(id=journal_id)
+        object.delete()
+        return HttpResponseRedirect(reverse("journal1:index"))
    
