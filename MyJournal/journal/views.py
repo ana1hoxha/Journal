@@ -1,39 +1,62 @@
+from django.http import HttpResponse
 from msilib.schema import ListView
 from multiprocessing import context
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 import datetime
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.urls import reverse, reverse_lazy
 from .models import Journal
-from .forms import SubscribeForm, RenewForm
+from .forms import SubscribeForm
 from django.views.generic.edit import UpdateView, DeleteView
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from functools import wraps
+
+#using decorators to check if the user is authenticated
+def login_required(f):
+    @wraps(f)
+    def g(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return f(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse("user1:login"))
+    return g
 
 
-
+@login_required
 def index(request):
-    return render(request, "journals/index.html",  {
-        "journals": Journal.objects.all()
-    })
+    #this is working
+    journals = Journal.objects.filter(user = request.user)
+    
+    context = {
+        "journals": journals,
+        "date": datetime.date.today()
+    }
+    return render(request, "journals/index.html",context)
 
 
+@login_required
 def journal(request, journal_id):
     try:
         journal= Journal.objects.get(id=journal_id)
+ 
     except Journal.DoesNotExist:
         raise Http404("Journal Not found")    
     return render(request, "journals/journal.html", {
         "journal": journal,
-        "date": datetime.date.today()
+        "date": datetime.date.today(),
     })
     
         
+@login_required        
 def add(request):
   if request.method == 'POST':
       try:
-          form = SubscribeForm(request.POST)
+          form = SubscribeForm(request.POST, request.FILES)
           if form.is_valid():
               journal = form.save(commit=False)
+              journal.user = request.user
               journal.journal_text = request.POST.get('journal_text')
               journal.save()
               return HttpResponseRedirect(reverse("journal1:index"))
@@ -55,7 +78,7 @@ def add(request):
       
       
 #HttpResponseRedirect: This creates a redirect to a specified URL (HTTP status code 302).
-   
+  
 """ def edit(request, journal_id):
     journal_instance = get_object_or_404(Journal, id=journal_id)
     if request.method == 'POST':
@@ -77,16 +100,18 @@ def add(request):
          
  """
 
-class JournalUpdate(UpdateView):
+class JournalUpdate(LoginRequiredMixin ,UpdateView):
     model = Journal
-    fields = "__all__"
+    fields = ['journal_text']
+    """ fields = "__all__" """
     template_name = "journals/add.html"
     success_url= reverse_lazy('journal1:index')
     
 
-class JournalDelete(DeleteView):
+class JournalDelete(LoginRequiredMixin , DeleteView):
     model= Journal
-    fields = "__all__"
+    fields = ['journal_text']
+    """ fields = "__all__" """
     template_name = "journals/journal.html"
     success_url= reverse_lazy('journal1:index') 
     
@@ -95,4 +120,6 @@ def delete(request, journal_id):
         object = Journal.objects.get(id=journal_id)
         object.delete()
         return HttpResponseRedirect(reverse("journal1:index"))
-   
+
+
+       

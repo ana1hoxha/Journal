@@ -6,34 +6,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
     <link rel="stylesheet" type="text/css" href="{% static 'journal\\journal.css' %}">    
+    <link rel="stylesheet" type="text/css" href="{% static 'journal\\style.css' %}">    
+
+
+    
+   
+    
+   
+
+
+
     <title>Document</title>
 </head>
 <body>
   
 
+<div class="container">
+
+  <div class="row">
+     
+    <div class="col-6">
+      <div>
+        <h1 class="greet">Hello {{request.user}}</h1>
+      </div>
+  </div>
+
+  <div class="col-6" >
+    <div class="d-flex justify-content-end">
+      <p class="date_">{{date}}</p>
+    </div> 
+  </div>
+
+  </div>
+
+
+
+
        <div class="row">
         
         <div class="col-3 mt-5">
 
-         
-            
+             <div>
               <a id = "return" href="{% url 'journal1:index' %}" class="btn btn-sm" role="button">Go back 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                 </svg></a> 
-           
+              </div>
+
+
+             <div class="mt-5">
+              <img  class="rounded" src="{{ journal.journal_image.url }}" alt="image">
+             </div>
+
           
         </div>
        
 
         <div class="col-6 mt-5">
-          <div class="card text-center" id="myCard">
-            <div class="card-body">
-              <p class="card-text">{{ journal.journal_text }}
-              </p>
-            </div>
-        </div>
+
+
+          <div>
+            <div class="card text-center" id="myCard">
+              <div class="card-body">
+                <p class="card-text">{{ journal.journal_text }}
+                </p>
+              
+              </div>  
+              <div class="card-footer text-muted d-flex justify-content-end" style="height: 2.4rem; font-style: italic;"> 
+               <div>Created on : {{journal.created_at}}</div>       
+                </div>
+          </div>
+          </div>
+       
 
 
      <div class="d-flex justify-content-end">
@@ -63,7 +110,7 @@
 
         <div class="col-3">          
           <div class="row">
-            <div class="col-6 mt-5">
+            <div class="d-flex justify-content-end">
               <img id="notebook" src="{% static 'journal\\images\\notebook.png' %}" alt="Journal - Notebook Clip Art @clipartmax.com">
             </div>
           </div>
@@ -71,8 +118,12 @@
        
 
        </div>
+
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>       
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
        <script src="{% static 'journal\\script.js' %}"></script>
       </body>
 </html>

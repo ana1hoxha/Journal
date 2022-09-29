@@ -6,11 +6,11 @@ from journal.models import Journal
 class SubscribeForm(ModelForm):
     class Meta:
         model = Journal
-        fields = "__all__"
-       # fields = ["journal_text"]  
+        #fields = "__all__"
+        fields = ["journal_text","journal_image"]  
         
         
-class RenewForm(ModelForm):
+""" class RenewForm(ModelForm):
     def clean_text(self):
         data = self.cleaned_data['journal_text']
         return data
@@ -18,7 +18,7 @@ class RenewForm(ModelForm):
     class Meta:
         model =  Journal
         fields = "__all__"
-        #fields = ["journal_text"]    
+        #fields = ["journal_text"]   """  
         
 
 
