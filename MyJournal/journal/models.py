@@ -10,7 +10,7 @@ class Journal(models.Model):
     journal_text = models.TextField()
     #this will just add the time stamp when it  was created
     created_at = models.DateTimeField(auto_now_add=True)
-    journal_image = models.ImageField(upload_to = 'images/')
+    journal_image = models.ImageField(upload_to = 'images/',null=True, blank=True)
     
     
     

@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" type="text/css" href="{% static 'journal\\journal.css' %}">    
-    <link rel="stylesheet" type="text/css" href="{% static 'journal\\style.css' %}">    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&family=Indie+Flower&display=swap" rel="stylesheet">
 
 
     
@@ -56,26 +57,29 @@
                 </svg></a> 
               </div>
 
-
+           
              <div class="mt-5">
-              <img  class="rounded" src="{{ journal.journal_image.url }}" alt="image">
+              {% if journal.journal_image %}
+             <img  class="rounded" src="{{ journal.journal_image.url }}" alt="image">
+              {% else %}
+               No photo
+              {% endif %}
              </div>
 
-          
         </div>
        
 
         <div class="col-6 mt-5">
 
 
-          <div>
-            <div class="card text-center" id="myCard">
+          <div id="outerJournal">
+            <div class="card text-center" id="myCard" style="border: none;">
               <div class="card-body">
                 <p class="card-text">{{ journal.journal_text }}
                 </p>
               
               </div>  
-              <div class="card-footer text-muted d-flex justify-content-end" style="height: 2.4rem; font-style: italic;"> 
+              <div class="card-footer text-muted d-flex justify-content-end"> 
                <div>Created on : {{journal.created_at}}</div>       
                 </div>
           </div>

@@ -1,3 +1,5 @@
+from calendar import month
+import re
 from django.http import HttpResponse
 from msilib.schema import ListView
 from multiprocessing import context
@@ -27,13 +29,19 @@ def login_required(f):
 @login_required
 def index(request):
     #this is working
-    journals = Journal.objects.filter(user = request.user)
-    
-    context = {
+    if 'filter_month' in request.POST:
+        results = request.POST.get('month_journal')
+        numbers = re.findall("[0-9]{2,4}",results)
+        month = int(numbers[1])
+        journals = Journal.objects.filter(user = request.user).filter(created_at__month=month)
+        return render(request, "journals/index.html",{"journals": journals})   
+    else:
+        journals = Journal.objects.filter(user = request.user)
+        context = {
         "journals": journals,
         "date": datetime.date.today()
-    }
-    return render(request, "journals/index.html",context)
+         }
+        return render(request, "journals/index.html",context)
 
 
 @login_required
@@ -102,7 +110,7 @@ def add(request):
 
 class JournalUpdate(LoginRequiredMixin ,UpdateView):
     model = Journal
-    fields = ['journal_text']
+    fields = ['journal_text','journal_image']
     """ fields = "__all__" """
     template_name = "journals/add.html"
     success_url= reverse_lazy('journal1:index')

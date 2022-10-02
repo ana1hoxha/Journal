@@ -9,6 +9,11 @@ class SubscribeForm(ModelForm):
         #fields = "__all__"
         fields = ["journal_text","journal_image"]  
         
+    def __init__(self, *args, **kwargs):
+        super(SubscribeForm, self).__init__(*args, **kwargs)
+        self.fields['journal_image'].required = False    
+        
+        
         
 """ class RenewForm(ModelForm):
     def clean_text(self):
